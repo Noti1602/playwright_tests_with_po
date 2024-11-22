@@ -1,5 +1,6 @@
 import { BaseSwagLabPage } from './BaseSwagLab.page';
-import { expect } from '@playwright/test';
+import { test, expect } from '@playwright/test';
+import { pickRandomItems } from './../utils/random_item';
 
 export class InventoryPage extends BaseSwagLabPage {
     url = '/inventory.html';
@@ -78,16 +79,8 @@ export class InventoryPage extends BaseSwagLabPage {
         }
       }
 
-      async pickRandomItems(numberOfProducts, productCount) {
-        const randomNumbers = new Set();
-        while (randomNumbers.size < Math.min(numberOfProducts, productCount)) {
-            randomNumbers.add(Math.floor(Math.random() * productCount));
-        }
-        return Array.from(randomNumbers);
-    }
-
       async addRandomProductsToCart(productCount) {
-        const uniqueRandomNumbers = await this.pickRandomItems(3, productCount);
+        const uniqueRandomNumbers = await pickRandomItems(3, productCount);
         const selectedProducts = [];
 
         for (const index of uniqueRandomNumbers) {
@@ -97,6 +90,9 @@ export class InventoryPage extends BaseSwagLabPage {
             const description = await this.getItemDescription(product);
             const price = await this.getItemPrice(product);
 
+            await test.info().attach('Selected product name', { body: JSON.stringify(name, null, 4) });
+            await test.info().attach('Selected product description', { body: JSON.stringify(description, null, 4) });
+            await test.info().attach('Selected product price', { body: JSON.stringify(price, null, 4) });
             console.log(`Selected product name: ${name}`);
             console.log(`Selected product description: ${description}`);
             console.log(`Selected product price: ${price}`);

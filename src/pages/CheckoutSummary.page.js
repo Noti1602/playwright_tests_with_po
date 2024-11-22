@@ -9,7 +9,7 @@ export class CheckoutSummaryPage extends BasePage {
 
     checkoutItemPrice = this.page.locator('.inventory_item_price');
 
-    checkoutItemSelector = ('.cart_item');
+    checkoutItemSelector = '.cart_item';
 
     totalPriceSelector = this.page.locator('.summary_subtotal_label');
 
