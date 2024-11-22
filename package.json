@@ -6,7 +6,14 @@
   "scripts": {
     "test": "npx playwright test",
     "test-ui": "npx playwright test --ui",
-    "lint": "npx eslint . --color --fix --quiet"
+    "lint": "npx eslint . --color --fix --quiet",
+    "test1:verifySorting-ui": "npx playwright test tests/Test1/test1.verifySorting.spec.js --ui",
+    "test2:addProductsToCart-ui": "npx playwright test tests/Test2/test2.addProductsToCart.spec.js --ui",
+    "test3:verifyCheckout-ui": "npx playwright test tests/Test3/test3.verifyCheckout.spec.js --ui",
+    "test1:verifySorting": "npx playwright test tests/Test1/test1.verifySorting.spec.js",
+    "test2:addProductsToCart": "npx playwright test tests/Test2/test2.addProductsToCart.spec.js",
+    "test3:verifyCheckout": "npx playwright test tests/Test3/test3.verifyCheckout.spec.js",
+    "report": "npx playwright show-report"
   },
   "keywords": [],
   "author": "",

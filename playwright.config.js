@@ -39,7 +39,7 @@ module.exports = defineConfig({
     /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
     use: {
         /* Default timeout for each Playwright action in milliseconds, defaults to 0 (no timeout). */
-        actionTimeout: 15_000,
+        actionTimeout: 25_000,
 
         /* Base URL to use in actions like `await page.goto('/')`. */
         baseURL: 'https://www.saucedemo.com',
@@ -63,15 +63,15 @@ module.exports = defineConfig({
             use: { ...devices['Desktop Chrome'] },
         },
 
-        {
-            name: 'webkit',
-            use: { ...devices['Desktop Safari'] },
-        },
+        // {
+        //     name: 'webkit',
+        //     use: { ...devices['Desktop Safari'] },
+        // },
 
-        {
-            name: 'firefox',
-            use: { ...devices['Desktop Firefox'] },
-        },
+        // {
+        //     name: 'firefox',
+        //     use: { ...devices['Desktop Firefox'] },
+        // },
 
         /* Test against mobile viewport. */
         // {

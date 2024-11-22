@@ -34,5 +34,6 @@ module.exports = {
             ignoreTemplateLiterals: true,
             ignoreRegExpLiterals: true,
         }],
+        "no-restricted-syntax": false,
     },
 };
