@@ -1,6 +1,5 @@
 import { BaseSwagLabPage } from './BaseSwagLab.page';
 
-// eslint-disable-next-line import/prefer-default-export
 export class ShoppingCartPage extends BaseSwagLabPage {
     url = '/cart.html';
 
@@ -39,8 +38,6 @@ export class ShoppingCartPage extends BaseSwagLabPage {
     }
 
     async clickCheckoutButton() {
-        console.log('Attempting to click the checkout button...');
         await this.checkOutButton.click();
-        console.log('Clicked the checkout button.');
     }
 }

@@ -14,32 +14,8 @@ test.describe('Test2 => Add several random Products to Cart and verify them', ()
 
         const productCount = await app.inventory.inventoryItems.count();
 
-        const randomNumbers = new Set();
-        while (randomNumbers.size < Math.min(2, productCount)) {
-            randomNumbers.add(Math.floor(Math.random() * productCount));
-        }
+        const selectedProducts = await app.inventory.addRandomProductsToCart(productCount); 
 
-        const uniqueRandomNumbers = Array.from(randomNumbers);
-        console.log(uniqueRandomNumbers);
-
-        const selectedProducts = [];
-
-        for (const index of uniqueRandomNumbers) {
-            const product = await app.inventory.inventoryItems.nth(index);
-
-            const name = await app.inventory.getItemName(product);
-            const description = await app.inventory.getItemDescription(product);
-            const price = await app.inventory.getItemPrice(product);
-
-            console.log(`Selected product name: ${name}`);
-            console.log(`Selected product description: ${description}`);
-            console.log(`Selected product price: ${price}`);
-
-            selectedProducts.push({ name, description, price });
-
-           await product.locator('[id^="add-to-cart"]').click();
-        }
-         
         await app.baseSwagLab.clickShoppingCartLink();
 
         await expect(app.shoppingCart.headerTitle).toBeVisible();

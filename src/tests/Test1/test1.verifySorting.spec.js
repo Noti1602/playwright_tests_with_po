@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 import { expect } from '@playwright/test';
 import { test } from '../../fixtures/base';
 
@@ -13,16 +12,26 @@ test.describe('Test1 => Perform and verify sorting on the Inventory page', () =>
 
         expect(await app.inventory.inventoryItems.count()).toBeGreaterThanOrEqual(1);
 
-        const originalPrices = await app.inventory.itemPrice.evaluateAll(
-            items => items.map(item => parseFloat(item.textContent.replace('$', '')))
-        );
+        const originalPrices = await app.inventory.getItemPrices();
+        const productNames = await app.inventory.getItemNames();
+
+        console.log(originalPrices);
+        console.log(productNames);
+
+        await app.inventory.selectOption('az');
+
+        await app.inventory.expectSortedProducts('Name (A to Z)', productNames, originalPrices);
+
+        await app.inventory.selectOption('za');
+
+        await app.inventory.expectSortedProducts('Name (Z to A)', productNames, originalPrices);
 
         await app.inventory.selectOption('lohi');
 
-        const sortedPrices = await app.inventory.itemPrice.evaluateAll(
-            items => items.map(item => parseFloat(item.textContent.replace('$', '')))
-        );
+        await app.inventory.expectSortedProducts('Price (low to high)', productNames, originalPrices);
 
-          expect(sortedPrices).toEqual([...originalPrices].sort((a, b) => a - b));
+        await app.inventory.selectOption('hilo');
+
+        await app.inventory.expectSortedProducts('Price (high to low)', productNames, originalPrices);
     });
 });
