@@ -18,13 +18,13 @@ module.exports = {
         ecmaVersion: 'latest',
     },
     rules: {
-        indent: [
-            'error',
-            4,
-            {
-                SwitchCase: 1,
-            },
-        ],
+        // indent: [
+        //     'error',
+        //     4,
+        //     {
+        //         SwitchCase: 1,
+        //     },
+        // ],
         'max-len': ['error', {
             code: 120,
             ignoreComments: true,
@@ -34,5 +34,10 @@ module.exports = {
             ignoreTemplateLiterals: true,
             ignoreRegExpLiterals: true,
         }],
+        "no-restricted-syntax": false,
+        "indent": 'off',
+        'no-warning-comments': 'off',
+        'import/prefer-default-export': 'off',
+
     },
 };
